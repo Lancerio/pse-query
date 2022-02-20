@@ -1,0 +1,64 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Space Mono', sans-serif;
+    color: #121212;
+    height: 100vh;
+    overflow: hidden;
+    margin: 0;
+    padding: 16px;
+}
+
+#search-bar {
+    padding: 8px;
+    width: max-content;
+    margin: 16px 0;
+}
+
+input {
+    font-family: inherit;
+    padding: 4px;
+    text-transform: uppercase;
+}
+
+.info {
+    padding: 16px;
+    background-color: #e2e8f0;
+    width: max-content;
+    border-radius: 8px;
+}
+
+.info-field {
+    margin: 8px;;
+    display: grid;
+    grid-template-columns: 100px 200px;
+    grid-template-rows: 30px;
+}
+
+.info-value {
+    padding-left: 8px;
+    grid-column: 2 / 3;
+    background-color: #fff;
+}
+
+.user-input {
+    margin-bottom: 32px;
+}
+
+#message {
+    font-size: 0.75rem;
+    margin-top: 4px;
+    margin-left: 8px;
+}
+
+.down {
+    color: red;
+}
+
+.up {
+    color: green;
+}

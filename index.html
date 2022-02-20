@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>PSE Stock Query</title>
+</head>
+
+<body>
+    <h1>PSE Stocks</h1>
+
+    <form id="search-bar">
+        <label for="stock-search">Search Stock</label>
+        <input type="text" name="stock-search" id="stock-search" placeholder="Ticker">
+    </form>
+
+
+    <div class="info">
+        <div class="info-field">
+            <span>Name:</span>
+            <p class="info-value" id="stock-name"></p>
+        </div>
+        <div class="info-field">
+            <span>Change %:</span>
+            <p class="info-value" id="stock-change"></p>
+        </div>
+        <div class="info-field">
+            <span>Price:</span>
+            <p class="info-value" id="stock-price"></p>
+        </div>
+        <div class="info-field">
+            <span>Symbol:</span>
+            <p class="info-value" id="stock-symbol"></p>
+        </div>
+        <div class="info-field">
+            <span>Volume:</span>
+            <p class="info-value" id="stock-volume"></p>
+        </div>
+    </div>
+
+    <p class="update" id="message"></p>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
