@@ -1,4 +1,4 @@
-const PSE_Data = "http://phisix-api3.appspot.com/stocks.json";
+const PSE_Data = "https://phisix-api3.appspot.com/stocks.json";
 
 const message = document.getElementById('message');
 const searchBar = document.getElementById('search-bar');
