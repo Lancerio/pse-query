@@ -1,10 +1,8 @@
 const PSE_Data = "https://phisix-api3.appspot.com/stocks.json";
-
 const message = document.getElementById('message');
 const searchBar = document.getElementById('search-bar');
 const stockSearch = document.getElementById('stock-search');
 
-const values = document.querySelectorAll('.info-value');
 let stockName = document.getElementById('stock-name');
 let stockSymbol = document.getElementById('stock-symbol');
 let stockChange = document.getElementById('stock-change');
@@ -24,49 +22,56 @@ async function getData(url) {
         const data = await response.json();
         displayPriceInfo(data);
     } catch (err) {
-        // alert('Data not avaiable from source.');
+        alert('Data not available from source.');
         console.log(err);
     }
 }
 
 function displayPriceInfo(data) {
     const stockQuery = stockSearch.value.toUpperCase();
-
-    // Convert Object to Array
     const stocks = Object.values(data.stock);
+    const result = stocks.find(({ symbol }) => symbol === stockQuery);
 
-    if (!stocks) {
-        message.innerHTML = 'Data not available from source';
+    // Find Symbol
+    if (result) {
+        const result = stocks.find(({ symbol }) => symbol === stockQuery);
+        setValues();
+        message.style.color = '';
+    } else {
+        setEmptyValue(stockName);
+        setEmptyValue(stockChange);
+        setEmptyValue(stockPrice);
+        setEmptyValue(stockSymbol);
+        setEmptyValue(stockVolume);
+        message.innerHTML = 'NO MATCH FOUND';
+        message.style.color = 'red';
     }
 
-    // Loop
-    for (let i = 0; i < stocks.length; i++) {
-        const name = stocks[i].name;
-        const change = stocks[i].percent_change;
-        const price = stocks[i].price;
-        const symbol = stocks[i].symbol;
-        const volume = stocks[i].volume;
+    stockSearch.value = '';
 
-        if (symbol === stockQuery) {
-            stockName.innerHTML = `${name}`;
-            stockChange.innerHTML = `${change.toFixed(2)}`;
-            stockPrice.innerHTML = `${price.amount.toFixed(4)}`;
-            stockSymbol.innerHTML = `${symbol}`;
-            stockVolume.innerHTML = `${volume.toLocaleString()}`;
-            message.innerHTML = `as of ${data.as_of.slice(0, 10)}`;
-            break;
-        } else {
-            message.innerHTML = 'NO MATCH FOUND';
-        }
-        stockSearch.value = '';
+    // Set Field Values
+    function setValues() {
+        const { name, percent_change, price, symbol, volume } = result;
+        stockName.innerHTML = `${name}`;
+        stockChange.innerHTML = `${percent_change.toFixed(2)}`;
+        stockPrice.innerHTML = `${price.amount.toFixed(4)}`;
+        stockSymbol.innerHTML = `${symbol}`;
+        stockVolume.innerHTML = `${volume.toLocaleString()}`;
+        message.innerHTML = `as of ${data.as_of.slice(0, 10)}`;
+        setColor();
     }
 
-    // Change % color
-    function setColor(n) {
-        if (n < 0) {
-            stockChange.classList.add('down');
+    function setEmptyValue(val) {
+        val.innerHTML = '';
+    }
+
+    // Set % change color
+    function setColor() {
+        const { percent_change } = result;
+        if (percent_change > 0) {
+            stockChange.style.color = 'green';
         } else {
-            stockChange.classList.add('up');
+            stockChange.style.color = 'red';
         }
     }
 }
